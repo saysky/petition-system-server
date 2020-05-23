@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.sens.mapper.LogMapper">
+  <resultMap id="BaseResultMap" type="com.example.sens.entity.Log">
+    <id column="id" property="id"/>
+    <id column="name" property="name"/>
+    <id column="log_type" property="logType"/>
+    <id column="user_id" property="userId"/>
+    <id column="ip" property="ip"/>
+    <result column="create_time"  property="createTime"/>
+  </resultMap>
+
+  <select id="findAll" resultMap="BaseResultMap">
+    SELECT * FROM log ORDER BY id DESC
+  </select>
+
+</mapper>

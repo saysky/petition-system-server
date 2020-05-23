@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.sens.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.example.sens.entity.User">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="password" property="password"/>
+        <result column="real_name" property="realName"/>
+        <result column="sex" property="sex"/>
+        <result column="email" property="email"/>
+        <result column="card" property="card"/>
+        <result column="address" property="address"/>
+        <result column="phone" property="phone"/>
+        <result column="type" property="type"/>
+        <result column="staff_level" property="staffLevel"/>
+        <result column="create_time" property="createTime"/>
+        <result column="birth" property="birth"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="BaseResultMap">
+    SELECT * FROM user ORDER BY id DESC
+  </select>
+
+    <select id="findByKeywords" resultMap="BaseResultMap">
+        SELECT * FROM user
+        <where>
+            <if test="keywords != null and keywords != ''">
+                (
+                name LIKE CONCAT('%', #{keywords}, '%') OR
+                real_name LIKE CONCAT('%', #{keywords}, '%') OR
+                email LIKE CONCAT('%', #{keywords}, '%') OR
+                phone LIKE CONCAT('%', #{keywords}, '%') OR
+                card LIKE CONCAT('%', #{keywords}, '%')
+                ) AND
+            </if>
+            <if test="type != null and type != ''">
+                (
+                    type = #{type}
+                ) AND
+            </if>
+            1 = 1
+        </where>
+        ORDER BY id DESC
+    </select>
+
+    <select id="findByUserName" resultMap="BaseResultMap">
+      select * from user where name = #{value} LIMIT 1
+    </select>
+</mapper>

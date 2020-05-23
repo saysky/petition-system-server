@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.sens.mapper.ReportMapper">
+    <resultMap id="BaseResultMap" type="com.example.sens.entity.Report">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="title" property="title"/>
+        <result column="content" property="content"/>
+        <result column="category_id" property="categoryId"/>
+        <result column="approval_time" property="approvalTime"/>
+        <result column="approval_state" property="approvalState"/>
+        <result column="place" property="place"/>
+        <result column="attachment_url" property="attachmentUrl"/>
+        <result column="create_time" property="createTime"/>
+        <result column="category_title" property="categoryTitle"/>
+        <result column="user_real_name" property="userRealName"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        SELECT t.*, u.real_name as user_real_name, c.title as category_title FROM report t, user u, category c
+        <where>
+            t.user_id = u.id AND
+            t.category_id = c.id AND
+            <if test="state != null">
+                t.approval_state = #{state} AND
+            </if>
+            <if test="keywords != null and keywords != ''">
+                (
+                t.title LIKE CONCAT('%', #{keywords}, '%') OR
+                u.real_name LIKE CONCAT('%', #{keywords}, '%') OR
+                c.title LIKE CONCAT('%', #{keywords}, '%')
+                ) AND
+            </if>
+            1 = 1
+        </where>
+        ORDER BY t.id DESC
+    </select>
+
+    <select id="findByUserId" resultMap="BaseResultMap">
+        SELECT t.*, u.real_name as user_real_name, c.title as category_title FROM report t, user u, category c
+        <where>
+            t.user_id = #{userId} AND
+            t.user_id = u.id AND
+            t.category_id = c.id AND
+            <if test="state != null">
+                t.approval_state = #{state} AND
+            </if>
+            <if test="keywords != null and keywords != ''">
+                (
+                t.title LIKE CONCAT('%', #{keywords}, '%') OR
+                u.real_name LIKE CONCAT('%', #{keywords}, '%') OR
+                c.title LIKE CONCAT('%', #{keywords}, '%')
+                ) AND
+            </if>
+            1 = 1
+        </where>
+        ORDER BY t.id DESC
+    </select>
+
+    <select id="findById" resultMap="BaseResultMap">
+      SELECT t.*, u.real_name as user_real_name, c.title as category_title
+      FROM report t, user u, category c
+      WHERE t.id = #{id}  AND t.user_id = u.id AND t.category_id = c.id
+
+
+  </select>
+
+</mapper>
