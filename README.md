@@ -53,3 +53,4 @@
 目前已经把前端代码打包放到 static 目录，可以直接访问使用。 <br/>
 前端 vue 代码将放在另一个仓库 [http://github.com/saysky/vue-petition-system](http://github.com/saysky/vue-petition-system)  <br/>
 或者联系博主：微信 847064370 获取
+

@@ -14,4 +14,3 @@
     SELECT * FROM log ORDER BY id DESC
   </select>
 
-</mapper>

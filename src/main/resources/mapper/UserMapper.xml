@@ -46,4 +46,3 @@
     <select id="findByUserName" resultMap="BaseResultMap">
       select * from user where name = #{value} LIMIT 1
     </select>
-</mapper>

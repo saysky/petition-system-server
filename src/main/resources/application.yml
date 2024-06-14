@@ -49,4 +49,3 @@ logging:
     org:
       springframework:
         boot:
-          autoconfigure: error

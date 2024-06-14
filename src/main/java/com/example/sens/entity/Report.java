@@ -85,4 +85,3 @@ public class Report implements Serializable {
     private Boolean allowApproval;
 
 
-}

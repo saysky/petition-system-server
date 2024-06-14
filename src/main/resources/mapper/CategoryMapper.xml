@@ -10,4 +10,3 @@
     SELECT * FROM category ORDER BY id DESC
   </select>
 
-</mapper>
